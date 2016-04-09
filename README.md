@@ -2690,41 +2690,50 @@ The Java Parser is used to create all the CREATE statments that the database wil
 
 Finally, I got my Graphy Database representing the elections:
 
-![Graphy](https://github.com/wcordeiro/project-template/blob/master/images/database.jpg)
+![Graphy](https://github.com/wcordeiro/project-template/blob/master/supports/images/database.JPG)
 
 The database, briefly, has: 40 nodes representing Constituencies, 552 nodes representing Candidates, 385 nodes representing regionally Parties (by constituency), 552 relationships "ran_for", 552 relationships "belongs_to" and 385 "in" between the Candidates and their Constituency and their Parties respectively and Parties and Constituencies.
 
 
 ## Queries
-Summarise your three queries here.
-Then explain them one by one in the following sections.
+As asked in the assignment the following queries are a try of giving useful information about the elections and show the cypher language and the graph database functionality.
 
-#### Query one title
-This query retreives the Bacon number of an actor...
+#### Parties Rank.
+The parties ranked by number of elected candidates.
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+match (cand:Candidate)-[r:BELLONGS_TO]->(p:Party)
+where cand.currentStatus = 'Elected'
+return p.name, count(cand.firstName) as CountTotal
+order by CountTotal desc
 ```
+Output:
+![Query1](https://github.com/wcordeiro/project-template/blob/master/supports/images/query1.JPG)
 
-#### Query two title
-This query retreives the Bacon number of an actor...
+#### Number of elected female candidates by Constiruency
+This query retrives the number of female candidates electeds in each constituency and sort by this number 
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+match (cand:Candidate)-[r:RAN_FOR]->(cons:Constituency)
+where cand.gender = 'Female' and cand.currentStatus = 'Elected'
+return cons.name,count(cand.SurName) as countTotal
+order by countTotal desc
 ```
+Output:
+![Query2](https://github.com/wcordeiro/project-template/blob/master/supports/images/query2.JPG)
 
-#### Query three title
-This query retreives the Bacon number of an actor...
+#### Real Number of electors for Region
+This query retreives the real number of electors for region.
 ```cypher
-MATCH
-	(Bacon)
-RETURN
-	Bacon;
+match (cons:Constituency)
+return distinct cons.RegionName as RegionName, sum(cons.electorate) as Electorate, sum(cons.electorate - cons.turnout) as TotalVoters, round(100*(toFloat(toFloat(sum(cons.electorate - cons.turnout)) / toFloat(sum(cons.electorate))))) as Percent 
+order by sum(cons.electorate - cons.turnout) desc
 ```
+Output:
+![Query3](https://github.com/wcordeiro/project-template/blob/master/supports/images/query3.JPG)
 
 ## References
 1. [Neo4J website](http://neo4j.com/), the website of the Neo4j database.
+2. [RTE website](http://www.rte.ie/news/election-2016/), all information about 2016 Irish General Elections RTE page
+3. [Agregation](http://neo4j.com/docs/stable/query-aggregation.html)
+4. [Order by](http://neo4j.com/docs/stable/query-order.html)
+5. [With](http://stackoverflow.com/questions/18975647/neo4j-cypher-query-to-return-relationship-property-and-sum-of-all-matching-relat)
+6. [JSON](http://www.java2s.com/Code/JarDownload/java/java-json.jar.zip)
