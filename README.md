@@ -4,20 +4,20 @@
 ## Introduction
 The main objective of this assignment is get the students update with the graph technology and how the same is used those days.
 
-The assigment uses the Neo4j database in order to facilitate the understandment and use of graphs.
+The assignment uses the Neo4j database in order to facilitate the understandment and use of graphs.
 The project's objective is to build a Graph Database using the Neo4j interface, and run some queries using the cypher language.
 
 The Database must be about the general election hold in Ireland in 2016.
 
-The Databae will hold information about constituencies, parties and candidates of this election.  
+The Database will hold information about constituencies, parties and candidates of this election.  
 
 ## Database
-The first challenge in building the database was finding a reliable and accessible source of information. The main sources are inclomplete or not easy to access or parse. 
+The first challenge in building the database was finding a reliable and accessible source of information. The main sources are incomplete or not easy to access or parse. 
 
 After a few failures I found the [RTE page](http://www.rte.ie/news/election-2016/), where the information can be accessed by a JSON formatted response.
 
 ![RTE page](https://github.com/wcordeiro/project-template/blob/master/supports/images/RTE.JPG) 
-The information in this website is divided by constituencies and the JSON format is really easy to parse.
+The information in this website is divided by constituencies and the JSON format is easy to parse.
 
 Example of JSON response.
 ```json
@@ -2709,8 +2709,8 @@ order by CountTotal desc
 Output:
 ![Query1](https://github.com/wcordeiro/project-template/blob/master/supports/images/query1.JPG)
 
-#### Number of elected female candidates by Constiruency
-This query retrives the number of female candidates electeds in each constituency and sort by this number 
+#### Number of elected female candidates by Constituency
+This query retrieves the number of female candidates elected in each constituency and sort by this number 
 ```cypher
 match (cand:Candidate)-[r:RAN_FOR]->(cons:Constituency)
 where cand.gender = 'Female' and cand.currentStatus = 'Elected'
@@ -2721,7 +2721,7 @@ Output:
 ![Query2](https://github.com/wcordeiro/project-template/blob/master/supports/images/query2.JPG)
 
 #### Real Number of electors for Region
-This query retreives the real number of electors for region.
+This query retrieves the real number of electors for region.
 ```cypher
 match (cons:Constituency)
 return distinct cons.RegionName as RegionName, sum(cons.electorate) as Electorate, sum(cons.electorate - cons.turnout) as TotalVoters, round(100*(toFloat(toFloat(sum(cons.electorate - cons.turnout)) / toFloat(sum(cons.electorate))))) as Percent 
@@ -2731,7 +2731,7 @@ Output:
 ![Query3](https://github.com/wcordeiro/project-template/blob/master/supports/images/query3.JPG)
 
 #### Number of re-elected candidates 
-This query retreives the Number of re-elected candidates by constituency.
+This query retrieves the Number of re-elected candidates by constituency.
 ```cypher
 match (cand:Candidate)-[r:RAN_FOR]->(cons:Constituency)
 where cand.sitting = 'Yes' and cand.currentStatus = 'Elected'
