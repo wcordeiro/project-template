@@ -1,9 +1,6 @@
-// Describe your query
-// at the start
-// in comments.
+// Real Number of electors for Region
+//This query retreives the real number of electors for region.
 
-
-MATCH
-	(n)
-RETURN
-	n;
+match (cons:Constituency)
+return distinct cons.RegionName as RegionName, sum(cons.electorate) as Electorate, sum(cons.electorate - cons.turnout) as TotalVoters, round(100*(toFloat(toFloat(sum(cons.electorate - cons.turnout)) / toFloat(sum(cons.electorate))))) as Percent 
+order by sum(cons.electorate - cons.turnout) desc;

@@ -2730,6 +2730,17 @@ order by sum(cons.electorate - cons.turnout) desc
 Output:
 ![Query3](https://github.com/wcordeiro/project-template/blob/master/supports/images/query3.JPG)
 
+#### Number of re-elected candidates 
+This query retreives the Number of re-elected candidates by constituency.
+```cypher
+match (cand:Candidate)-[r:RAN_FOR]->(cons:Constituency)
+where cand.sitting = 'Yes' and cand.currentStatus = 'Elected'
+return cons.name, count(cand.SurName) as Total, round(100*(toFloat(count(cand.SurName)) / toFloat(cons.noSeats))) as Percent 
+order by count(cand.SurName) desc
+```
+Output:
+![Query4](https://github.com/wcordeiro/project-template/blob/master/supports/images/query4.JPG)
+
 ## References
 1. [Neo4J website](http://neo4j.com/), the website of the Neo4j database.
 2. [RTE website](http://www.rte.ie/news/election-2016/), all information about 2016 Irish General Elections RTE page
