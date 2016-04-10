@@ -575,3 +575,16 @@ Storage files: (filename : modification date - size)
 2016-04-09 15:13:28.026+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by scheduler for time threshold [28]:  Check pointing completed
 2016-04-09 15:13:28.026+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
 2016-04-09 15:13:28.026+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-04-09 15:28:28.293+0000 INFO  [o.n.k.i.f.GraphDatabaseFacade] Shutdown started
+2016-04-09 15:28:28.293+0000 INFO  [o.n.k.i.f.CommunityFacadeFactory] Database is now unavailable
+2016-04-09 15:28:28.317+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Starting check pointing...
+2016-04-09 15:28:28.324+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Starting store flush...
+2016-04-09 15:28:28.333+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Store flush completed
+2016-04-09 15:28:28.333+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Starting appending check point entry into the tx log...
+2016-04-09 15:28:28.357+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Appending check point entry into the tx log completed
+2016-04-09 15:28:28.357+0000 INFO  [o.n.k.i.t.l.c.CheckPointerImpl] Check Pointing triggered by database shutdown [28]:  Check pointing completed
+2016-04-09 15:28:28.358+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Starting log pruning.
+2016-04-09 15:28:28.358+0000 INFO  [o.n.k.i.t.l.p.LogPruningImpl] Log Rotation [0]:  Log pruning complete.
+2016-04-09 15:28:30.130+0000 INFO  [o.n.k.NeoStoreDataSource] NeoStores closed
+2016-04-09 15:28:30.130+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics START ---
+2016-04-09 15:28:30.130+0000 INFO  [o.n.k.i.DiagnosticsManager] --- STOPPING diagnostics END ---
